@@ -1,0 +1,30 @@
+* {
+  font-family: 'Cute Font', sans-serif;
+}
+
+.mytitle {
+      color: white;
+      text-align: center;
+      background-image: url(http://www.forest.go.kr/newkfsweb/cmm/fms/FileDown.do?atchFileId=FILE_000000010008639&fileSn=0);
+      background-size: cover;
+      background-position: center;
+      width: 300px;
+      height: 200px;
+      border-radius: 10px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .mytitle > h1 {
+      margin: 0 0 5px 0;
+      /*위에서 부터 시계방향 이경우엔 h1 아래에만 5로 여백 생김*/
+    }
+    .mytitle > h5 {
+      margin: 5px 0 0 0;
+    }
+    .wrap {
+      width: 300px;
+      margin: 50px auto 0 auto;
+    }
