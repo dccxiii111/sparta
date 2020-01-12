@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>hw1</title>
+	<!-- JQuery 를 import 합니다 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+
+<!-- ff -->
+	<style type="text/css">
+		.wrap {
+			padding: 2rem;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		.teduri {
+			width: 500px;
+			padding: 2rem;
+			margin: 2rem auto;
+			border-color: #e9ecef;
+			border-radius: 0.3rem;
+			border: solid;
+			display: block;
+			font-family: 'Jua', sans-serif;
+
+		}
+	</style>
+
+	<script>
+		function f1(){
+		var i1 = $('#id1').val();
+		var i2 = $('#id2').val();
+		var i3 = $('#id3').val();
+		var i4 = $('#id4').val();
+			if (i1 == '') {alert('이름을 입력하세요');return}
+			else if (i2 == '') {alert('수량을 입력하세요')return}
+			else if (i2 < 0) {alert('수량을 제대로 입력하세요')return}
+			else if (i3 == '') {alert('주소를 입력하세요')return}
+			else if (i4 == '') {alert('전화번호를 입력하세요')return}
+
+		}
+
+	</script>
+
+</head>
+
+<body>
+	<div class="wrap">
+		<img src="https://www.kgc.co.kr/upload//upload_file/product/2017/11/09/470x4221.png" width="400" height=auto>
+		<h1>홍삼 팝니다</h1><p> 가격: 3000원/개</p>
+		<h4>이 홍삼은 특별해요 힘이 뿜뿜</h4>
+
+		<form>
+			<div class=teduri>
+				<div class="form-group">
+					<label for="inputAddress">주문자이름</label>
+					<input id="id1" type="text" class="form-control" placeholder="이름">
+				</div>
+				<div class="form-group">
+					<label for="inputAddress">수량</label>
+					<select class="form-group" id="i2"> 
+						<option selected value> --수량을 선택하세요--
+						<option value="1">1
+						<option value="2">2
+						</option>						
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress2">주소</label>
+					<input id="id3" type="text" class="form-control" placeholder="주소">
+				</div>
+				<div class="form-group">
+					<label for="inputAddress2">전화번호</label>
+					<input id="id4" type="text" class="form-control" placeholder="(-)미포함">
+				</div>
+				<div align="center">
+
+				<button onclick="f1()" type="submit" class="btn btn-primary btn-lg">주문하기</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
