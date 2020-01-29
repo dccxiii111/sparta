@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>hw3</title>
+	<!-- 정렬 ctrl shift f   브라우저띄우기 f12 -->
+	<!-- JQuery or ajax를 import 합니다 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Bootstrap 을 import 합니다 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<!-- 폰트를 import 합니다 -->
+	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+
+	<!-- style 넣기 -->
+	<style type="text/css">
+		.wrap {
+			padding: 2rem;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		.teduri {
+			width: 500px;
+			padding: 2rem;
+			margin: 2rem auto;
+			border-color: #e9ecef;
+			border-radius: 0.3rem;
+			border: solid;
+			display: block;
+			font-family: 'Jua', sans-serif;
+
+		}
+	</style>
+
+	<script>
+
+		$(document).ready(function(){
+			listing();
+		});
+
+		function listing() {
+			console.log('화면 로딩 후 잘 실행되었습니다');
+		}
+
+		function isCellPhone(p) {
+			var regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})[-][0-9]{3,4}[-][0-9]{4}$/;
+			return regExp.test(p);
+		}
+
+		function order_blank(){
+			var i1 = $('#order_name').val();
+			var i2 = $('#order_count').val();
+			var i3 = $('#order_address').val();
+			var i4 = $('#order_phone').val();
+
+			if (i1 == '') {
+				alert('이름을 입력하세요')
+				$('#order_name').focus()
+				return
+			}
+			else if (i2 == '') {
+				alert('수량을 입력하세요');
+				$('#order_count').focus()
+			}
+			else if (i3 == '') {
+				alert('주소를 입력하세요')
+				$('#order_address').focus()
+				return;
+			}
+			else if (i4 == '') {
+				alert('전화번호를 입력하세요')
+				$('#order_phone').focus()
+				return;
+			}  
+			else if (!isCellPhone(i4)) {
+				alert('휴대폰번호 입력 형식이 틀립니다. \n 010-0000-0000으로 입력해주세요')
+				return;
+			}
+			$.ajax({
+				type: "GET",
+				url: "http://spartacodingclub.shop/order",
+				data: {},
+				success: function(response){
+					var rows = response["orders"];
+					for (var i = 0; i < rows.length; i++) {
+						var num=(i+1);
+						var name = rows[i]['name'];
+						var count = rows[i]['count'];
+						var address = rows[i]['address'];
+						var	temp_list = '<tr>\
+						<td>'+num+'</td>\
+						<td>'+name+'</td>\
+						<td>'+count+'</td>\
+						<td>'+address+'</td>\
+						</tr>';
+						$('#order_list').append(temp_list);
+					}
+				}
+				})
+		}
+		
+
+
+
+	</script>
+
+</head>
+
+<body>
+	<div class="wrap">
+		<img src="https://www.kgc.co.kr/upload//upload_file/product/2017/11/09/470x4221.png" width="400" height=auto>
+		<h1>홍삼 팝니다</h1><p> 가격: 3000원/개</p>
+		<h4>이 홍삼은 특별해요 힘이 뿜뿜</h4>
+
+		<div>
+			<div class=teduri>
+				<div class="form-group">
+					<label for="inputAddress">주문자이름</label>
+					<input id="order_name" type="text" class="form-control" placeholder="이름을 입력하세요">
+				</div>
+				<div class="form-group">
+					<label for="inputAddress">수량</label>
+					<select class="form-group" id="order_count"> 
+						<option selected value> --수량을 선택하세요--</option>
+						<option value="1">1</option>
+						<option value="2">2</option>			
+						
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress2">주소</label>
+					<input id="order_address" type="text" class="form-control" placeholder="주소">
+				</div>
+				<div class="form-group">
+					<label for="inputAddress2">전화번호</label>
+					<input id="order_phone" type="text" style="text-align:center;" placeholder="010-0000-0000 형식으로 (-)포함해주세요" />
+					<!-- <input id="order_phone" type="text" onKeyup="phoneFomatter(this);" maxlength="13" class="form-control" placeholder="(-)미포함"> -->
+				</div>
+				<div align="center">
+
+					<button onclick="order_blank();" class="btn btn-primary btn-lg">주문하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">성함</th>
+				<th scope="col">수량</th>
+				<th scope="col">주소</th>
+			</tr>
+		</thead>
+		<tbody id='order_list'>
+		</tbody>
+	</table>
+</body>
+</html>
